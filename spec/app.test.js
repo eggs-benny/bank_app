@@ -26,4 +26,12 @@ describe('App', () => {
       expect(console.log).toHaveBeenCalledWith(expect.stringContaining('date || credit || debit || balance'))
     })
   })
+
+  describe('#makeDeposit', () => {
+    it('prints a statement showing one deposit', () =>{
+      app.printStatement()
+      app.makeDeposit(1000)
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('10/01/2023 || 1000.00 || || 1000.00'))
+    })
+  })
 })
