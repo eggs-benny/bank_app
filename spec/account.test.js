@@ -17,10 +17,12 @@ describe('Account', () => {
   })
 
   describe('#withdraw', () => {
-    it('returns a 1000 balance after a 1000 deposit', () =>{
+    it('returns a balance of 2500 after deposits of 3000 & withdrawal of 500', () =>{
       const account = new Account
       account.deposit(1000)
-      expect(account.showBalance()).toEqual(1000)
+      account.deposit(2000)
+      account.withdraw(500)
+      expect(account.showBalance()).toEqual(2500)
     })
   })
 })
