@@ -5,9 +5,9 @@ let account, fakeDeposit, fakeDeposit2, fakeWithdrawal
 
   beforeEach(() => {
     account = new Account()
-    fakeDeposit = {deposit: 1000, withdrawal: 0}
-    fakeDeposit2 = {deposit: 2000, withdrawal: 0}
-    fakeWithdrawal = {deposit: 0, withdrawal: 500}
+    fakeDeposit = {date: '10/01/2023', deposit: 1000, withdrawal: 0}
+    fakeDeposit2 = {date: '13/01/2023', deposit: 2000, withdrawal: 0}
+    fakeWithdrawal = {date: '14/01/2023', deposit: 0, withdrawal: 500}
   });
   
   describe('#showBalance', () => {

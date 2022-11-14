@@ -1,3 +1,4 @@
+**Brief**
 - You should be able to interact with your code via a REPL like IRB or Node. (You don't need to implement a command line interface that takes input from STDIN.)
 
 - Deposits, withdrawal.
@@ -20,7 +21,9 @@ date || credit || debit || balance
 13/01/2023 || 2000.00 || || 3000.00
 10/01/2023 || 1000.00 || || 1000.00
 
+--
 
+**User Stories**
 As a customer
 So I can manage my money
 I want to be able to see my bank balance after any transaction
@@ -39,6 +42,9 @@ I can see all statement of transactions, dated, with most recent first
 
 
 -----
+**Planning/Design**
+
+EXCALIDRAW: https://excalidraw.com/#json=i4X7bzwM16nHVXs63xMtI,tnwl1m44zZkEFheNwBhZoQ
 
 Account
 balance = returns total
@@ -47,92 +53,52 @@ balance += deposit
 balance -= deposit
 Start at 0
 
-
-
 Transaction framework:
 - A date
 - An action (deposit / withdrawal)
 - An amount
 
-Balance / statement framework
+Account framework
 - Each transaction updates the balance
-- Statement can be printed, it prints each 
-- Has header
-
-``
-┌────────────────────────────┐
-│ Account                    │
-│                            │
-│ - add transaction          │
-│ -                          │
-│ - search_by_title(keyword) │
-│   => [tracks...]           │
-└───────────┬────────────────┘
-            │
-            │ owns a list of
-            ▼
-┌─────────────────────────┐
-│ Transaction             │
-│                         │
-│ - date                  │
-│ - amount                │
-│                         │
-└─────────────────────────┘
+- Statement can be printed, it prints each transaction to date
+- Statement includes header
 
 ``` javascript
-function Transaction(date = new Date(), amount) {
+Class Transaction() {
   this.date = date
   this.amount = amount
 }
 
-const transaction1 = new Transaction(Date('2023-01-10T00:00:00'), 1000.00)
-const transaction2 = new Transaction(Date('2023-01-13T00:00:00'), 2000.00)
-const transaction3 = new Transaction(Date('2023-01-14T00:00:00'), -500.00)
+Class Account() {
+  this.balance = 0
 
-class BankAccount {
-  constructor(date, amount) {
-    this.date = date
-    this.balance = 0
+  showBalance(){
+    // shows current balance
   }
 
-  balance() {
-    // sums all previous transactions including itself
-  }
-
-
-
-  transaction(date, amount, action)
-
-  addRolls(roll) {
-    if (this.isComplete()) {
-      return;
-    }
-    this.frameArray.push(roll);
-  }
-
-  frameArr() {
-    return this.frameArray;
-  }
-
-  sumRolls() {
-    let sum = 0;
-    this.frameArray.map((roll) => (sum += roll));
-    return sum;
-  }
-
-  isStrike() {
-    return this.frameArray[0] === 10;
-  }
-
-  isSpare() {
-    return !this.isStrike() && this.sumRolls() === 10;
-  }
-
-  isComplete() {
-    return this.isStrike() || this.frameArray.length === 2;
-  }
-
-  firstRoll() {
-    return this.frameArray[0];
+  updateBalanceWithTransaction(transaction) {
+    // updates balance with a transaction (deposit / withdrawal)
   }
 }
+```
+**Tests**
+Unit Test - Transaction
+Checks deposit:
+- deposit: 1000, date: '13/01/2023'
+expect(transaction.date).toEqual('13/01/2023')
+expect(transaction.deposit).toEqual(1000)
+
+Checks withdrawal:
+- withdrawal: 500, date: '13/01/2023'
+expect(transaction.date).toEqual('13/01/2023')
+expect(transaction.withdrawal).toEqual(500)
+
+Unit Test - Account
+- show balance, starting at 0
+expect(account.showBalance).toEqual(0)
+
+- show balance, deposit 1000
+expect(account.showBalance).toEqual(1000)
+
+- show balance, deposit 1000+2000, withdraw 500
+expect(account.showBalance).toEqual(2500)
