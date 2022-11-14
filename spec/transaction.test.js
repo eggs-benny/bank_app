@@ -17,4 +17,12 @@ describe('Transaction', () => {
     expect(transaction.isDeposit()).toBe(true)
     })
   })
+
+  describe('#isWithdrawal', () => {
+    it('returns true if amount is -ve', () => {
+    const transaction = new Transaction(-1000)
+    expect(transaction.isDeposit()).toBe(false)
+    expect(transaction.isWithdrawal()).toBe(true)
+    })
+  })
 });
