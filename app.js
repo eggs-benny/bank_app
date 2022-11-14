@@ -8,6 +8,10 @@ class App {
     this.account = new Account();
     this.statement = new Statement();
   }
+
+  printStatement() {
+    console.log(this.statement.printStatement())
+  }
 }
 
 module.exports = App

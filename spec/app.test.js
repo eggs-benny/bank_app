@@ -5,18 +5,25 @@ const App = require('../app');
 
 
 describe('App', () => {
-  let transaction, account, statement;
+  let transaction, account, statement
+  const log = console.log
 
   beforeEach(() => {
+    console.log = jest.fn()
     app = new App()
     transaction = new Transaction();
     account = new Account();
     statement = new Statement();
   })
 
+  afterAll(() => {
+    console.log = log;
+  })
+
   describe('#printStatement', () => {
     it('prints an empty statement (just headers)', () =>{
-      expect(app.printStatment).toEqual('date || credit || debit || balance')
+      app.printStatement()
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('date || credit || debit || balance'))
     })
   })
 })
