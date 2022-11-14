@@ -4,7 +4,7 @@ describe('Statement', () => {
     describe('#printHeader', () => {
       it('prints statement with column headers', () => {
         statement = new Statement
-        expect(statement).toEqual('date || credit || debit || balance');
+        expect(statement.header).toEqual('date || credit || debit || balance');
       });
     });
   });
