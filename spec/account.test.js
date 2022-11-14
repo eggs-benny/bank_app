@@ -11,7 +11,7 @@ describe('Account', () => {
   describe('#updateBalanceWithTransaction', () => {
     it('returns a 1000 balance after 1000 deposit made', () =>{
       const account = new Account()
-      const fakeDeposit = {deposit: () => 1000, withdrawal: () => 0}
+      const fakeDeposit = {deposit: 1000, withdrawal: 0}
       account.updateBalanceWithTransaction(fakeDeposit)
       expect(account.showBalance()).toEqual(1000)
     })

@@ -9,13 +9,10 @@ class Account {
     return this.balance
   }
 
-  // deposit(amount) {
-  //   this.balance += amount
-  // }
-
-  // withdraw(amount) {
-  //   this.balance -= amount
-  // }
-}
+  updateBalanceWithTransaction(transaction) {
+    if(transaction.deposit) {
+    this.balance += transaction.deposit}
+    }
+  }
 
 module.exports = Account
