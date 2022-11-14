@@ -19,6 +19,10 @@ class Statement {
     })
     return result.join('\n')
   }
+
+  printStatement() {
+    return `${this.header}\n${this.formatTransactions()}`
+  }
 }
 
 module.exports = Statement
