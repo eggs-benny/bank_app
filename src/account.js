@@ -1,5 +1,3 @@
-// const Transaction = require("./transaction")
-
 class Account {
   constructor() {
     this.balance = 0;
@@ -16,6 +14,8 @@ class Account {
     if (transaction.withdrawal) {
       this.balance -= transaction.withdrawal;
     }
+    transaction.balance = this.balance
+    console.log(transaction.balance)
   }
 }
 
