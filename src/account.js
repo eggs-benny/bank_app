@@ -15,7 +15,6 @@ class Account {
       this.balance -= transaction.withdrawal;
     }
     transaction.balance = this.balance
-    console.log(transaction.balance)
   }
 }
 

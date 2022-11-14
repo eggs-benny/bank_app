@@ -1,6 +1,6 @@
-const Transaction = require('./transaction');
-const Account = require('./account');
-const Statement = require('./statement');
+const Transaction = require('./src/transaction');
+const Account = require('./src/account');
+const Statement = require('./src/statement');
 
 class App {
   constructor() {
@@ -8,8 +8,6 @@ class App {
     this.account = new Account();
     this.statement = new Statement();
   }
-
-  
 }
 
 module.exports = App
