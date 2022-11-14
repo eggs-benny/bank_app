@@ -6,11 +6,10 @@ class Statement {
 
   addTransaction(transaction) {
     this.allTransactions.push(transaction)
-    console.log(this.body)
   }
 
   format() {
-    const result = this.allTransactions.map(transaction => `${transaction.date} || ${transaction.deposit.toFixed(2)} || || ${transaction.deposit.toFixed(2)}`)
+    const result = this.allTransactions.map(transaction => `${transaction.date} || ${transaction.deposit.toFixed(2)} || || ${transaction.deposit.toFixed(2)}\n`)
     return result.toString()
   }
 }
