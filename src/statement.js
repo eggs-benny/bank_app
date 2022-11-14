@@ -9,8 +9,8 @@ class Statement {
   }
 
   format() {
-    const result = this.allTransactions.map(transaction => `${transaction.date} || ${transaction.deposit.toFixed(2)} || || ${transaction.deposit.toFixed(2)}\n`)
-    return result.toString()
+    const result = this.allTransactions.map(transaction => `${transaction.date} || ${transaction.deposit.toFixed(2)} || || ${transaction.balance.toFixed(2)}\n`)
+    return result.join('')
   }
 }
 
