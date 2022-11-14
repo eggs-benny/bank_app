@@ -5,6 +5,13 @@ class Transaction {
     this.date = date
   }
 
+  isDeposit(){
+    return this.amount > 0
+  }
+
+  isWithdrawal(){
+    return this.amount < 0
+  }
 }
 
 module.exports = Transaction
