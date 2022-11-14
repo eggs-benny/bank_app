@@ -1,16 +1,9 @@
 class Transaction {
-  constructor(amount) {
-    this.amount = amount
+  constructor(deposit, withdrawal) {
+    this.deposit = deposit
+    this.withdrawal = withdrawal
     const date = new Date().toLocaleDateString()
     this.date = date
-  }
-
-  isDeposit(){
-    return this.amount > 0
-  }
-
-  isWithdrawal(){
-    return this.amount < 0
   }
 }
 
