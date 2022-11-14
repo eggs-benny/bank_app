@@ -1,17 +1,23 @@
 const Account = require('../src/account');
 
 describe('Account', () => {
+let account, fakeDeposit, fakeDeposit2, fakeWithdrawal
+
+  beforeEach(() => {
+    account = new Account()
+    fakeDeposit = {deposit: 1000, withdrawal: 0}
+    fakeDeposit2 = {deposit: 2000, withdrawal: 0}
+    fakeWithdrawal = {deposit: 0, withdrawal: 500}
+  });
+  
   describe('#showBalance', () => {
     it('returns a 0 balance initially', () => {
-      const account = new Account();
       expect(account.showBalance()).toEqual(0);
     });
   });
 
   describe('#updateBalanceWithTransaction', () => {
     it('returns a 1000 balance after 1000 deposit made', () =>{
-      const account = new Account()
-      const fakeDeposit = {deposit: 1000, withdrawal: 0}
       account.updateBalanceWithTransaction(fakeDeposit)
       expect(account.showBalance()).toEqual(1000)
     })
@@ -19,13 +25,9 @@ describe('Account', () => {
 
   describe('#updateBalanceWithTransaction', () => {
     it('returns a 1000 balance after 1000 deposit made', () =>{
-      const account = new Account()
-      const fakeDeposit = {deposit: 1000, withdrawal: 0}
-      const fakeDeposit2 = {deposit: 2000, withdrawal: 0}
-      const fakeWithdrawal = {deposit: 0, withdrawal: 500}
       account.updateBalanceWithTransaction(fakeDeposit)
       account.updateBalanceWithTransaction(fakeDeposit2)
-      account.updateBalanceWithTransaction(fakeWithdrawal)
+      account.updateBalanceWithTransaction(fakeWithdrawal) // DRY
       expect(account.showBalance()).toEqual(2500)
     })
   })

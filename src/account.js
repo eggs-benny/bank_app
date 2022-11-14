@@ -2,17 +2,21 @@
 
 class Account {
   constructor() {
-    this.balance = 0
+    this.balance = 0;
   }
 
   showBalance() {
-    return this.balance
+    return this.balance;
   }
 
   updateBalanceWithTransaction(transaction) {
-    if(transaction.deposit) {
-    this.balance += transaction.deposit}
+    if (transaction.deposit) {
+      this.balance += transaction.deposit;
+    }
+    if (transaction.withdrawal) {
+      this.balance -= transaction.withdrawal;
     }
   }
+}
 
-module.exports = Account
+module.exports = Account;
