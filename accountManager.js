@@ -9,6 +9,7 @@ class AccountManager {
   }
 
   makeDeposit(amount) {
+    if (amount <= 0) throw new Error(`Deposit can't be <= 0. If you meant to withdraw, use makeWithdrawal() function.`)
     const transaction = new Transaction()
     Object.assign(transaction, {deposit: amount, withdrawal: 0})
     this.accountBalance.updateWithTransaction(transaction)
@@ -16,6 +17,7 @@ class AccountManager {
   }
 
   makeWithdrawal(amount) {
+    if (amount <= 0) throw new Error(`Withdrawal can't be <= 0. If you meant to deposit, use makeDeposit() function.`) 
     const transaction = new Transaction()
     Object.assign(transaction, {deposit: 0, withdrawal: amount})
     this.accountBalance.updateWithTransaction(transaction)
