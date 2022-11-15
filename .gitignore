@@ -1,4 +1,5 @@
 package.json
+package 2.json
 node_modules/
 package-lock.json
 coverage/

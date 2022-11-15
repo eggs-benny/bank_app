@@ -8,30 +8,28 @@ class BankAccount {
     this.statement = new Statement();
   }
 
-  makeDeposit(amount) {
-    if (amount <= 0)
-      return `Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`;
-    if (isNaN(amount))
-      return `Error: input must be a number`
-    const transaction = new Transaction();
-    Object.assign(transaction, { deposit: amount, withdrawal: 0 });
-    this.accountBalance.updateWithTransaction(transaction);
-    this.statement.addTransaction(transaction);
-  }
-
-  makeWithdrawal(amount) {
-    if (amount <= 0)
-      return `Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`;
-      if (isNaN(amount))
-      return `Error: input must be a number`
-    const transaction = new Transaction();
-    Object.assign(transaction, { deposit: 0, withdrawal: amount });
-    this.accountBalance.updateWithTransaction(transaction);
-    this.statement.addTransaction(transaction);
+  makeTransaction(transactionType, amount) {
+    if (amount <= 0) { return `Error: input can't be <= 0.` }
+    if (isNaN(amount)) { return `Error: input must be a number` }
+    if (!(transactionType === 'deposit' || transactionType === 'withdrawal')) {
+      return `Error: transaction must be 'withdrawal' or 'deposit' only`;
+}
+    this._transactionProcess(transactionType, amount);
   }
 
   printStatement() {
     return this.statement.printStatement();
+  }
+
+  _transactionProcess(transactionType, amount) {
+    const transaction = new Transaction();
+    if (transactionType === 'deposit') {
+      Object.assign(transaction, { deposit: amount, withdrawal: 0 });
+    } else if (transactionType === 'withdrawal') {
+      Object.assign(transaction, { deposit: 0, withdrawal: amount });
+    }
+    this.accountBalance.updateWithTransaction(transaction);
+    this.statement.addTransaction(transaction);
   }
 }
 module.exports = BankAccount;

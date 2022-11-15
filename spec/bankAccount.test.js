@@ -16,26 +16,26 @@ describe('BankAccount', () => {
     });
   });
 
-  describe('#makeDeposit', () => {
+  describe('#makeTransaction', () => {
     it('returns a statement displaying one deposit', () => {
-      bankAccount.makeDeposit(1000);
+      bankAccount.makeTransaction('deposit', 1000);
       expect(bankAccount.printStatement()).toMatch(
         '10/01/2023 || 1000.00 || || 1000.00'
       );
     });
 
     it('returns a statement displaying two deposits', () => {
-      bankAccount.makeDeposit(1000);
-      bankAccount.makeDeposit(2000);
+      bankAccount.makeTransaction('deposit', 1000);
+      bankAccount.makeTransaction('deposit', 2000);
       expect(bankAccount.printStatement()).toMatch(
         '10/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00'
       );
     });
 
     it('returns a statement displaying two deposits & a withdrawal', () => {
-      bankAccount.makeDeposit(1000);
-      bankAccount.makeDeposit(2000);
-      bankAccount.makeWithdrawal(500);
+      bankAccount.makeTransaction('deposit', 1000);
+      bankAccount.makeTransaction('deposit', 2000);
+      bankAccount.makeTransaction('withdrawal', 500);
       expect(bankAccount.printStatement()).toMatch(
         '10/01/2023 || || 500.00 || 2500.00\n10/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00'
       );
@@ -43,24 +43,29 @@ describe('BankAccount', () => {
   });
 
   describe('Edge Cases', () => {
-    it('rounds deposit / withdrawal to 2 decimal places', () => {
-      bankAccount.makeDeposit(1000.013);
-      bankAccount.makeWithdrawal(500.066);
+    it('rounds deposit / Transaction to 2 decimal places', () => {
+      bankAccount.makeTransaction('deposit', 1000.013);
+      bankAccount.makeTransaction('withdrawal', 500.066);
       expect(bankAccount.printStatement()).toMatch(
         '10/01/2023 || || 500.07 || 499.95\n10/01/2023 || 1000.01 || || 1000.01'
       );
     });
 
-    it('returns error message if deposit or withdrawal <= 0', () => {
-      expect(bankAccount.makeDeposit(-1000)).toBe(`Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`)
-      expect(bankAccount.makeDeposit(0)).toBe(`Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`)
-      expect(bankAccount.makeWithdrawal(-1000)).toBe(`Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`)
-      expect(bankAccount.makeWithdrawal(0)).toBe(`Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`)
+    it('returns error message if deposit or Transaction <= 0', () => {
+      expect(bankAccount.makeTransaction('deposit', -1000)).toBe(`Error: input can't be <= 0.`)
+      expect(bankAccount.makeTransaction('deposit', 0)).toBe(`Error: input can't be <= 0.`)
+      expect(bankAccount.makeTransaction('withdrawal', -1000)).toBe(`Error: input can't be <= 0.`)
+      expect(bankAccount.makeTransaction('withdrawal', 0)).toBe(`Error: input can't be <= 0.`)
     });
 
-    it('returns error message if deposit or withdrawal is not a number', () => {
-      expect(bankAccount.makeDeposit('one')).toBe(`Error: input must be a number`)
-      expect(bankAccount.makeWithdrawal(new Object)).toBe(`Error: input must be a number`)
+    it('returns error message if deposit or Transaction is not a number', () => {
+      expect(bankAccount.makeTransaction('deposit', 'one')).toBe(`Error: input must be a number`)
+      expect(bankAccount.makeTransaction('deposit', new Object)).toBe(`Error: input must be a number`)
+    });
+
+    it('returns error message if transaction is anything other than "deposit" or "withdrawal"', () => {
+      expect(bankAccount.makeTransaction('car', 1000)).toBe(`Error: transaction must be 'withdrawal' or 'deposit' only`)
+      expect(bankAccount.makeTransaction('a', 1000)).toBe(`Error: transaction must be 'withdrawal' or 'deposit' only`)
     });
   });
 });
