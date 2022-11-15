@@ -35,4 +35,12 @@ describe('App', () => {
       expect(app.printStatement()).toMatch('10/01/2023 || 1000.00 || || 1000.00')
     })
   })
+
+  describe('#makeDeposit', () => {
+    it('prints a statement showing two deposit', () =>{
+      app.makeDeposit(1000)
+      app.makeDeposit(2000)
+      expect(app.printStatement()).toMatch('10/01/2023 || 1000.00 || || 1000.00\n10/01/2023 || 2000.00 || || 3000.00')
+    })
+  })
 })
