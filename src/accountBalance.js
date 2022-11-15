@@ -14,7 +14,7 @@ class AccountBalance {
     if (transaction.withdrawal) {
       this.balance -= transaction.withdrawal;
     }
-    transaction.balance = this.balance
+    transaction.balance = this.balance;
   }
 }
 
