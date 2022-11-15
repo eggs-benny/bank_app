@@ -4,28 +4,26 @@ const Statement = require('./src/statement');
 
 class AccountManager {
   constructor() {
-    this.transaction = new Transaction();
     this.accountBalance = new AccountBalance();
     this.statement = new Statement();
   }
 
   makeDeposit(amount) {
-    Object.assign(this.transaction, {deposit: amount, withdrawal: 0})
-    this._runBankingProcess()
+    const transaction = new Transaction()
+    Object.assign(transaction, {deposit: amount, withdrawal: 0})
+    this.accountBalance.updateWithTransaction(transaction)
+    this.statement.addTransaction(transaction)
   }
 
   makeWithdrawal(amount) {
-    Object.assign(this.transaction, {deposit: 0, withdrawal: amount})
-    this._runBankingProcess()
+    const transaction = new Transaction()
+    Object.assign(transaction, {deposit: 0, withdrawal: amount})
+    this.accountBalance.updateWithTransaction(transaction)
+    this.statement.addTransaction(transaction)
   }
 
   printStatement() {
     return this.statement.printStatement()
-  }
-
-  _runBankingProcess() {
-    this.accountBalance.updateWithTransaction(this.transaction)
-    this.statement.addTransaction(this.transaction)
   }
 }
 

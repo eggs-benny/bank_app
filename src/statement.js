@@ -6,10 +6,11 @@ class Statement {
 
   addTransaction(transaction) {
     this.allTransactions.push(transaction)
+    console.log(this.allTransactions)
   }
 
   formatTransactions() {
-    const result = this.allTransactions.map(transaction => {
+    const formattedTransactions = this.allTransactions.map(transaction => {
       if (transaction.deposit > 0) {
         return `${transaction.date} || ${transaction.deposit.toFixed(2)} || || ${transaction.balance.toFixed(2)}`
       }
@@ -17,7 +18,7 @@ class Statement {
         return `${transaction.date} || || ${transaction.withdrawal.toFixed(2)} || ${transaction.balance.toFixed(2)}`
       }
     })
-    return result.join('\n')
+    return formattedTransactions.join('\n')
   }
 
   printStatement() {
