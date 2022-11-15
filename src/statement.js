@@ -16,7 +16,7 @@ class Statement {
       if (transaction.withdrawal > 0) {
         return `${transaction.date} || || ${transaction.withdrawal.toFixed(2)} || ${transaction.balance.toFixed(2)}`
       }
-    })
+    }).reverse()
     return formattedTransactions.join('\n')
   }
 
