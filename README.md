@@ -44,17 +44,17 @@ Setup new account:
 - bankAccount = new BankAccount()
 
 Deposit or Withdraw an amount into/from your account:
-- bankAccount.makeDeposit({deposit amount})
-OR
-- bankAccount.makeWithdrawal({withdrawal amount})
-
-## Input is handled as follows:
-Multiple deposits & withdrawals can be made.
-Amounts can be any positive number, and will be rounded to 2 decimal places.
-Only numbers are accepted, it is not possible to make 0 or negative value transactions.
+- bankAccount.makeDeposit(transactionType, amount)
 
 Print a statement of your transactions:
 - bankAccount.printStatement()
+
+## Input handling
+- transactionType
+must be 'deposit' or 'withdrawal' else an error will be thrown.
+- amount
+must be a positive number greater than 0, else an error will be thrown.
+numbers will be rounded to 2 decimal places.
 
 ## Testing
 Unit tests & integration tests all pass, with a >95% coverage.
