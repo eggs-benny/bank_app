@@ -1,4 +1,4 @@
-# Bank Account App (Tech Test)
+# Bank Tech Test
 
 ## Dependencies & installation
 This program runs in JavaScript, is tested using Jest & run in Node.
@@ -55,6 +55,9 @@ must be 'deposit' or 'withdrawal' else an error will be thrown.
 - amount
 must be a positive number greater than 0, else an error will be thrown.
 numbers will be rounded to 2 decimal places.
+
+## Testing
+Unit tests & integration tests all pass, with a >95% coverage.
 
 ## Usage
 [ScreenShot](./appDisplay.png) of the app's usage.
