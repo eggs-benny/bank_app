@@ -21,38 +21,6 @@ describe('AccountManager', () => {
       expect(accountManager.printStatement()).toMatch('10/01/2023 || 1000.00 || || 1000.00')
     })
 
-    it('returns error if deposit is -ve', () =>{
-      const t = () => {
-        accountManager.makeDeposit(-1000)
-      };
-        expect(t).toThrow(Error)
-        expect(t).toThrow(`Deposit can't be <= 0. If you meant to withdraw, use makeWithdrawal() function.`)
-    })
-
-    it('returns error if deposit is 0', () =>{
-      const t = () => {
-        accountManager.makeDeposit(0)
-      };
-        expect(t).toThrow(Error)
-        expect(t).toThrow(`Deposit can't be <= 0. If you meant to withdraw, use makeWithdrawal() function.`)
-    })
-
-    it('returns error if withdrawal is -ve', () =>{
-      const t = () => {
-        accountManager.makeWithdrawal(-1000)
-      };
-        expect(t).toThrow(Error)
-        expect(t).toThrow(`Withdrawal can't be <= 0. If you meant to deposit, use makeDeposit() function.`)
-    })
-
-    it('returns error if withdrawal is 0', () =>{
-      const t = () => {
-        accountManager.makeWithdrawal(0)
-      };
-        expect(t).toThrow(Error)
-        expect(t).toThrow(`Withdrawal can't be <= 0. If you meant to deposit, use makeDeposit() function.`)
-    })
-
     it('returns a statement displaying two deposits', () =>{
       accountManager.makeDeposit(1000)
       accountManager.makeDeposit(2000)
@@ -64,6 +32,46 @@ describe('AccountManager', () => {
       accountManager.makeDeposit(2000)
       accountManager.makeWithdrawal(500)
       expect(accountManager.printStatement()).toMatch('10/01/2023 || || 500.00 || 2500.00\n10/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00')
+    })
+  })
+
+  describe('Edge Cases', () =>{
+    it('rounds deposit / withdrawal to 2 decimal places', () =>{
+      accountManager.makeDeposit(1000.013)
+      accountManager.makeWithdrawal(500.066)
+      expect(accountManager.printStatement()).toMatch('10/01/2023 || || 500.07 || 499.95\n10/01/2023 || 1000.01 || || 1000.01')
+    })
+
+    it('returns error if deposit is -ve', () =>{
+      const input = () => {
+        accountManager.makeDeposit(-1000)
+      };
+        expect(input).toThrow(Error)
+        expect(input).toThrow(`\n***\n***\nDeposit can't be <= 0. If you meant to withdraw, use makeWithdrawal() function.\n***\n***`)
+    })
+
+    it('returns error if deposit is 0', () =>{
+      const input = () => {
+        accountManager.makeDeposit(0)
+      };
+        expect(input).toThrow(Error)
+        expect(input).toThrow(`\n***\n***\nDeposit can't be <= 0. If you meant to withdraw, use makeWithdrawal() function.\n***\n***`)
+    })
+
+    it('returns error if withdrawal is -ve', () =>{
+      const input = () => {
+        accountManager.makeWithdrawal(-1000)
+      };
+        expect(input).toThrow(Error)
+        expect(input).toThrow(`\n***\n***\nWithdrawal can't be <= 0. If you meant to deposit, use makeDeposit() function.\n***\n***`)
+    })
+
+    it('returns error if withdrawal is 0', () =>{
+      const input = () => {
+        accountManager.makeWithdrawal(0)
+      };
+        expect(input).toThrow(Error)
+        expect(input).toThrow(`\n***\n***\nWithdrawal can't be <= 0. If you meant to deposit, use makeDeposit() function.\n***\n***`)
     })
   })
 })
