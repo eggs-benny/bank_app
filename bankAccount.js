@@ -11,6 +11,8 @@ class BankAccount {
   makeDeposit(amount) {
     if (amount <= 0)
       return `Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`;
+    if (isNaN(amount))
+      return `Error: input must be a number`
     const transaction = new Transaction();
     Object.assign(transaction, { deposit: amount, withdrawal: 0 });
     this.accountBalance.updateWithTransaction(transaction);
@@ -20,6 +22,8 @@ class BankAccount {
   makeWithdrawal(amount) {
     if (amount <= 0)
       return `Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`;
+      if (isNaN(amount))
+      return `Error: input must be a number`
     const transaction = new Transaction();
     Object.assign(transaction, { deposit: 0, withdrawal: amount });
     this.accountBalance.updateWithTransaction(transaction);
