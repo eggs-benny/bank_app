@@ -51,11 +51,16 @@ describe('BankAccount', () => {
       );
     });
 
-    it('returns error message if deposit is -ve', () => {
+    it('returns error message if deposit or withdrawal <= 0', () => {
       expect(bankAccount.makeDeposit(-1000)).toBe(`Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`)
       expect(bankAccount.makeDeposit(0)).toBe(`Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`)
       expect(bankAccount.makeWithdrawal(-1000)).toBe(`Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`)
       expect(bankAccount.makeWithdrawal(0)).toBe(`Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`)
+    });
+
+    it('returns error message if deposit or withdrawal is not a number', () => {
+      expect(bankAccount.makeDeposit('one')).toBe(`Error: input must be a number`)
+      expect(bankAccount.makeWithdrawal(new Object)).toBe(`Error: input must be a number`)
     });
   });
 });
