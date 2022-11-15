@@ -65,7 +65,7 @@ describe('BankAccount', () => {
 
     it('returns error message if transaction is anything other than "deposit" or "withdrawal"', () => {
       expect(bankAccount.makeTransaction('car', 1000)).toBe(`Error: transaction must be 'withdrawal' or 'deposit' only`)
-      expect(bankAccount.makeTransaction('a', 1000)).toBe(`Error: transaction must be 'withdrawal' or 'deposit' only`)
+      expect(bankAccount.makeTransaction(1000, 1000)).toBe(`Error: transaction must be 'withdrawal' or 'deposit' only`)
     });
   });
 });

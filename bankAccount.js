@@ -25,7 +25,8 @@ class BankAccount {
     const transaction = new Transaction();
     if (transactionType === 'deposit') {
       Object.assign(transaction, { deposit: amount, withdrawal: 0 });
-    } else if (transactionType === 'withdrawal') {
+    }
+    if (transactionType === 'withdrawal') {
       Object.assign(transaction, { deposit: 0, withdrawal: amount });
     }
     this.accountBalance.updateWithTransaction(transaction);
