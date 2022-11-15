@@ -26,5 +26,4 @@ class AccountManager {
     return this.statement.printStatement()
   }
 }
-
 module.exports = AccountManager

@@ -6,7 +6,6 @@ class Statement {
 
   addTransaction(transaction) {
     this.allTransactions.push(transaction)
-    console.log(this.allTransactions)
   }
 
   formatTransactions() {

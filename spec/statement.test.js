@@ -39,11 +39,11 @@ describe('Statement', () => {
       );
     });
 
-    it('returns statement with two deposits', () => {
+    it('returns statement with two deposits in reverse chron order', () => {
       statement.addTransaction(fakeDeposit);
       statement.addTransaction(fakeDeposit2);
       expect(statement.printStatement()).toMatch(
-        '10/01/2023 || 1000.00 || || 1000.00\n13/01/2023 || 2000.00 || || 3000.00'
+        '13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00'
       );
     });
 
@@ -52,7 +52,7 @@ describe('Statement', () => {
       statement.addTransaction(fakeDeposit2);
       statement.addTransaction(fakeWithdrawal);
       expect(statement.printStatement()).toMatch(
-        '10/01/2023 || 1000.00 || || 1000.00\n13/01/2023 || 2000.00 || || 3000.00\n14/01/2023 || || 500.00 || 2500.00'
+        '14/01/2023 || || 500.00 || 2500.00\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00'
       );
     });
   });
