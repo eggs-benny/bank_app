@@ -3,6 +3,9 @@ const Account = require('../src/account');
 const Statement = require('../src/statement');
 const App = require('../app');
 
+jest
+.useFakeTimers()
+.setSystemTime(new Date('2023-01-10'))
 
 describe('App', () => {
   let transaction, account, statement
@@ -22,16 +25,14 @@ describe('App', () => {
 
   describe('#printStatement', () => {
     it('prints an empty statement (just headers)', () =>{
-      app.printStatement()
-      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('date || credit || debit || balance'))
+      expect(app.printStatement()).toMatch('date || credit || debit || balance')
     })
   })
 
   describe('#makeDeposit', () => {
     it('prints a statement showing one deposit', () =>{
-      app.printStatement()
       app.makeDeposit(1000)
-      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('10/01/2023 || 1000.00 || || 1000.00'))
+      expect(app.printStatement()).toMatch('10/01/2023 || 1000.00 || || 1000.00')
     })
   })
 })

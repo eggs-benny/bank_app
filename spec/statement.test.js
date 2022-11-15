@@ -34,16 +34,16 @@ describe('Statement', () => {
   describe('#printStatement', () => {
     it('prints statement with one deposit', () => {
       statement.addTransaction(fakeDeposit);
-      expect(statement.printStatement()).toEqual(
-        'date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00'
+      expect(statement.printStatement()).toMatch(
+        '10/01/2023 || 1000.00 || || 1000.00'
       );
     });
 
     it('prints statement with two deposits', () => {
       statement.addTransaction(fakeDeposit);
       statement.addTransaction(fakeDeposit2);
-      expect(statement.printStatement()).toEqual(
-        'date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00\n13/01/2023 || 2000.00 || || 3000.00'
+      expect(statement.printStatement()).toMatch(
+        '10/01/2023 || 1000.00 || || 1000.00\n13/01/2023 || 2000.00 || || 3000.00'
       );
     });
 
@@ -51,8 +51,8 @@ describe('Statement', () => {
       statement.addTransaction(fakeDeposit);
       statement.addTransaction(fakeDeposit2);
       statement.addTransaction(fakeWithdrawal);
-      expect(statement.printStatement()).toEqual(
-        'date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00\n13/01/2023 || 2000.00 || || 3000.00\n14/01/2023 || || 500.00 || 2500.00'
+      expect(statement.printStatement()).toMatch(
+        '10/01/2023 || 1000.00 || || 1000.00\n13/01/2023 || 2000.00 || || 3000.00\n14/01/2023 || || 500.00 || 2500.00'
       );
     });
   });

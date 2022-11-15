@@ -9,8 +9,15 @@ class App {
     this.statement = new Statement();
   }
 
+  makeDeposit(amount) {
+    Object.assign(this.transaction, {deposit: amount, withdrawal: 0})
+    this.statement.addTransaction(this.transaction)
+    this.account.updateBalanceWithTransaction(this.transaction)
+    return
+  }
+
   printStatement() {
-    console.log(this.statement.printStatement())
+    return this.statement.printStatement()
   }
 }
 
