@@ -56,6 +56,9 @@ Only numbers are accepted, it is not possible to make 0 or negative value transa
 Print a statement of your transactions:
 - bankAccount.printStatement()
 
+## Testing
+Unit tests & integration tests all pass, with a >95% coverage.
+
 ## Usage
 [ScreenShot](./appDisplay.png) of the app's usage.
 Feel free to follow these steps to test the app yourself!
