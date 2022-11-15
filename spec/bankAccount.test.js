@@ -1,3 +1,4 @@
+const { default: expect } = require('expect');
 const BankAccount = require('../bankAccount');
 
 describe('BankAccount', () => {
@@ -50,44 +51,11 @@ describe('BankAccount', () => {
       );
     });
 
-    it('returns error if deposit is -ve', () => {
-      const input = () => {
-        bankAccount.makeDeposit(-1000);
-      };
-      expect(input).toThrow(Error);
-      expect(input).toThrow(
-        `Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`
-      );
-    });
-
-    it('returns error if deposit is 0', () => {
-      const input = () => {
-        bankAccount.makeDeposit(0);
-      };
-      expect(input).toThrow(Error);
-      expect(input).toThrow(
-        `Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`
-      );
-    });
-
-    it('returns error if withdrawal is -ve', () => {
-      const input = () => {
-        bankAccount.makeWithdrawal(-1000);
-      };
-      expect(input).toThrow(Error);
-      expect(input).toThrow(
-        `Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`
-      );
-    });
-
-    it('returns error if withdrawal is 0', () => {
-      const input = () => {
-        bankAccount.makeWithdrawal(0);
-      };
-      expect(input).toThrow(Error);
-      expect(input).toThrow(
-        `Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`
-      );
+    it('returns error message if deposit is -ve', () => {
+      expect(bankAccount.makeDeposit(-1000)).toBe(`Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`)
+      expect(bankAccount.makeDeposit(0)).toBe(`Error: Deposit can't be <= 0. To withdraw, use makeWithdrawal() function.`)
+      expect(bankAccount.makeWithdrawal(-1000)).toBe(`Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`)
+      expect(bankAccount.makeWithdrawal(0)).toBe(`Error: Withdrawal can't be <= 0. To deposit, use makeDeposit() function.`)
     });
   });
 });
