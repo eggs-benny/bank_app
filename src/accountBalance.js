@@ -1,13 +1,13 @@
-class Account {
+class AccountBalance {
   constructor() {
     this.balance = 0;
   }
 
-  showBalance() {
+  _show() {
     return this.balance;
   }
 
-  updateBalanceWithTransaction(transaction) {
+  updateWithTransaction(transaction) {
     if (transaction.deposit) {
       this.balance += transaction.deposit;
     }
@@ -18,4 +18,4 @@ class Account {
   }
 }
 
-module.exports = Account;
+module.exports = AccountBalance;

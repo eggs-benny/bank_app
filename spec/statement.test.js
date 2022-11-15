@@ -26,20 +26,20 @@ describe('Statement', () => {
   });
 
   describe('#header', () => {
-    it('prints statement with column headers', () => {
+    it('returns column headers', () => {
       expect(statement.header).toEqual('date || credit || debit || balance');
     });
   });
 
   describe('#printStatement', () => {
-    it('prints statement with one deposit', () => {
+    it('returns statement with one deposit', () => {
       statement.addTransaction(fakeDeposit);
       expect(statement.printStatement()).toMatch(
         '10/01/2023 || 1000.00 || || 1000.00'
       );
     });
 
-    it('prints statement with two deposits', () => {
+    it('returns statement with two deposits', () => {
       statement.addTransaction(fakeDeposit);
       statement.addTransaction(fakeDeposit2);
       expect(statement.printStatement()).toMatch(
@@ -47,7 +47,7 @@ describe('Statement', () => {
       );
     });
 
-    it('prints statement with two deposits & a withdrawal', () => {
+    it('returns statement with two deposits & a withdrawal', () => {
       statement.addTransaction(fakeDeposit);
       statement.addTransaction(fakeDeposit2);
       statement.addTransaction(fakeWithdrawal);
