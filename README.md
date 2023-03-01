@@ -1,4 +1,4 @@
-# Bank Tech Test
+# Bank App
 
 ## Dependencies & installation
 This program runs in JavaScript, is tested using Jest & run in Node.
